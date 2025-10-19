@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "titulo": "Dune: Parte Dos",
+    "generos": ["Ciencia ficción", "Aventura"],
+    "imagen": "dune2.jpg",
+    "sinopsis": "En esta segunda parte, Paul Atreides une fuerzas con los Fremen mientras busca venganza contra los conspiradores que destruyeron su familia. A medida que las casas nobles se enfrentan por el control del desierto de Arrakis, Paul deberá tomar decisiones que definirán el destino de todo el imperio galáctico.",
+    "trailer": "https://www.youtube.com/embed/mSY_NbSmaUI",
+    "estreno": "2025-10-15",
+    "precios": { "estreno": 6.50, "normal": 4.00 }
+  },
+  {
+    "id": 2,
+    "titulo": "50 primeras citas",
+    "generos": ["Comedia", "Romance"],
+    "imagen": "50-primeras-citas.jpg",
+    "sinopsis": "Henry es un biólogo marino que se enamora de Lucy, una mujer que sufre pérdida de memoria a corto plazo. Cada día ella olvida quién es él, por lo que Henry debe encontrar formas creativas de conquistarla una y otra vez, demostrando que el amor puede superar cualquier obstáculo.",
+    "trailer": "https://www.youtube.com/embed/17KJk3ErIx0",
+    "estreno": "2004-02-13",
+    "precios": { "estreno": 5.00, "normal": 3.00 }
+  },
+  {
+    "id": 3,
+    "titulo": "El Caballero de la Noche",
+    "generos": ["Acción", "Drama"],
+    "imagen": "batman-caballero-de-la-noche.webp",
+    "sinopsis": "Batman se enfrenta a su enemigo más peligroso: el Joker, un criminal impredecible que busca sumir a Ciudad Gótica en el caos. Mientras el héroe lucha entre la justicia y la venganza, deberá tomar decisiones que pondrán a prueba sus principios y su identidad como símbolo de esperanza.",
+    "trailer": "https://www.youtube.com/embed/dzQtWkpc2-c",
+    "estreno": "2008-07-18",
+    "precios": { "estreno": 5.50, "normal": 3.50 }
+  },
+  {
+    "id": 4,
+    "titulo": "Interestelar",
+    "generos": ["Ciencia ficción", "Drama"],
+    "imagen": "interestelar.jpg",
+    "sinopsis": "Un grupo de exploradores viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad. La película aborda temas profundos sobre el tiempo, el amor y la supervivencia, explorando los límites de la ciencia y el sacrificio humano en una historia épica y emocional.",
+    "trailer": "https://www.youtube.com/embed/zSWdZVtXT7E",
+    "estreno": "2014-11-07",
+    "precios": { "estreno": 5.00, "normal": 3.00 }
+  },
+  {
+    "id": 5,
+    "titulo": "Barbie",
+    "generos": ["Comedia", "Fantasía"],
+    "imagen": "barbie.jpg",
+    "sinopsis": "Barbie vive en un mundo perfecto hasta que empieza a cuestionar su propósito y decide aventurarse al mundo real. Allí descubrirá la complejidad de ser humana y enfrentará los desafíos de la identidad y la libertad en una historia colorida, divertida y con un poderoso mensaje sobre la autenticidad.",
+    "trailer": "https://www.youtube.com/embed/pBk4NYhWNMM",
+    "estreno": "2023-07-20",
+    "precios": { "estreno": 6.00, "normal": 4.00 }
+  },
+  {
+    "id": 6,
+    "titulo": "Oppenheimer",
+    "generos": ["Drama", "Histórica"],
+    "imagen": "oppenheimer.jpg",
+    "sinopsis": "La historia del físico J. Robert Oppenheimer, quien lideró el Proyecto Manhattan para desarrollar la primera bomba atómica. La película retrata sus dilemas morales, las consecuencias de su creación y el peso que tuvo sobre su conciencia y la humanidad entera.",
+    "trailer": "https://www.youtube.com/embed/uYPbbksJxIg",
+    "estreno": "2023-07-21",
+    "precios": { "estreno": 6.50, "normal": 4.50 }
+  },
+  {
+    "id": 7,
+    "titulo": "Avatar: El Camino del Agua",
+    "generos": ["Ciencia ficción", "Aventura"],
+    "imagen": "avatar2.jpg",
+    "sinopsis": "Jake Sully y Neytiri han formado una familia en Pandora, pero deben abandonar su hogar cuando una antigua amenaza regresa. La película combina acción espectacular con una profunda reflexión sobre la familia, el medio ambiente y la conexión espiritual con la naturaleza.",
+    "trailer": "https://www.youtube.com/embed/d9MyW72ELq0",
+    "estreno": "2022-12-16",
+    "precios": { "estreno": 5.50, "normal": 3.50 }
+  },
+  {
+    "id": 8,
+    "titulo": "Spider-Man: A través del Spider-Verso",
+    "generos": ["Animación", "Acción"],
+    "imagen": "spiderverse.jpg",
+    "sinopsis": "Miles Morales se embarca en una nueva aventura a través del multiverso, donde conocerá diferentes versiones de Spider-Man. Juntos deberán enfrentarse a una amenaza que pone en riesgo todas las realidades, en una historia visualmente impresionante y emocionalmente poderosa.",
+    "trailer": "https://www.youtube.com/embed/shW9i6k8cB0",
+    "estreno": "2023-06-02",
+    "precios": { "estreno": 6.00, "normal": 4.00 }
+  }
+]

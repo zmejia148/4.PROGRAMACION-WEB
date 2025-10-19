@@ -1,0 +1,91 @@
+<script>
+  $(function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
+
+    function calcularEstadoYPrecio(peli) {
+      const hoy = new Date();
+      const estrenoDate = new Date(peli.estreno);
+      if (isNaN(estrenoDate.getTime())) {
+        return { estado: "Fecha no disponible", precio: peli.precios.normal };
+      }
+      const diffDays = Math.floor((hoy - estrenoDate) / (1000 * 60 * 60 * 24));
+      if (hoy < estrenoDate) {
+        return { estado: "Próximo estreno", precio: peli.precios.estreno };
+        // Cargar reseñas
+        $.getJSON("../data/reseñas.json", function (reseñas) {
+          const lista = reseñas[peli.id];
+          if (lista && lista.length > 0) {
+            let htmlRes = "";
+            lista.forEach(r => {
+              const estrellas = "★".repeat(r.calificacion) + "☆".repeat(5 - r.calificacion);
+              htmlRes += `
+                <div class="border rounded p-3 mb-2">
+                  <strong>${r.usuario}</strong>
+                  <div class="text-warning">${estrellas}</div>
+                  <p class="mb-0">${r.comentario}</p>
+                </div>
+              `;
+            });
+            $("#lista-reseñas").html(htmlRes);
+          } else {
+            $("#lista-reseñas").html(`<p class="text-muted">No hay reseñas disponibles.</p>`);
+          }
+        });
+      } else if (diffDays >= 0 && diffDays <= 29) {
+        return { estado: "Estreno", precio: peli.precios.estreno };
+      } 
+      else {
+        return { estado: "En cartelera regular", precio: peli.precios.normal };
+      }
+    }
+
+    $.ajax({
+      url: "../data/peliculas.json",
+      method: "GET",
+      dataType: "json",
+      success: function (peliculas) {
+        const peli = peliculas.find((p) => p.id == id);
+        if (peli) {
+          const resultado = calcularEstadoYPrecio(peli);
+
+          $("#titulo").text(peli.titulo);
+          $("#poster").attr("src", "../img/" + peli.imagen);
+          $("#sinopsis").text(peli.sinopsis);
+          $("#trailer").attr("src", peli.trailer);
+
+          // Mostrar badges de géneros
+          $('#genero').removeClass().empty();
+          (peli.generos || []).forEach(g => {
+            $('#genero').append(`<span class="badge bg-secondary me-1">${g}</span>`);
+          });
+
+          // Agregar badge de estado y mostrar precio actual
+          const badgeClass = (resultado.estado === 'Estreno' || resultado.estado === 'Próximo estreno') ? 'bg-danger' : 'bg-success';
+          $('.alert-info').replaceWith(`<div class="alert ${badgeClass} text-white" role="alert">${resultado.estado} — Precio actual: $${resultado.precio.toFixed(2)}</div>`);
+        } else {
+          mostrarError();
+        }
+      },
+      error: function () {
+        mostrarError();
+      },
+    });
+
+    function mostrarError() {
+      $("#detalle-pelicula").html(`
+        <div class="alert alert-danger text-center" role="alert">
+          No se pudo cargar la información de la película.
+        </div>
+        <div class="text-center">
+          <a href="../index.html" class="btn btn-secondary mt-3">Volver al inicio</a>
+        </div>
+      `);
+    }
+  });
+  <!-- Sección de reseñas -->
+  <div class="mt-5">
+    <h4>Reseñas de los usuarios</h4>
+    <div id="lista-reseñas" class="mt-3"></div>
+  </div>
+</script>

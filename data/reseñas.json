@@ -1,0 +1,35 @@
+{
+  "1": [
+    {"usuario": "María", "comentario": "Una secuela impresionante. Los efectos visuales y la trama son excepcionales.", "calificacion": 5},
+    {"usuario": "Carlos", "comentario": "Un poco más lenta que la primera parte, pero visualmente impactante.", "calificacion": 4},
+    {"usuario": "Lucía", "comentario": "Denis Villeneuve lo hace de nuevo, increíble ambientación.", "calificacion": 5}
+  ],
+  "2": [
+    {"usuario": "Ana", "comentario": "Divertida y tierna. Me encanta ver cómo Henry conquista a Lucy cada día.", "calificacion": 5},
+    {"usuario": "Luis", "comentario": "Una comedia romántica inolvidable.", "calificacion": 4}
+  ],
+  "3": [
+    {"usuario": "Pedro", "comentario": "El mejor Joker de todos los tiempos. Oscura y brillante.", "calificacion": 5},
+    {"usuario": "Javier", "comentario": "Una obra maestra del cine de superhéroes.", "calificacion": 5}
+  ],
+  "4": [
+    {"usuario": "Camila", "comentario": "Una historia profunda sobre el tiempo y el amor.", "calificacion": 5},
+    {"usuario": "Andrés", "comentario": "Una película que te hace pensar mucho.", "calificacion": 4}
+  ],
+  "5": [
+    {"usuario": "Rosa", "comentario": "Colorida, divertida y con mensaje poderoso.", "calificacion": 5},
+    {"usuario": "Mario", "comentario": "Muy buena, pero algo exagerada en partes.", "calificacion": 4}
+  ],
+  "6": [
+    {"usuario": "Esteban", "comentario": "Magníficamente dirigida y con actuaciones intensas.", "calificacion": 5},
+    {"usuario": "Paola", "comentario": "Muy larga, pero vale la pena.", "calificacion": 4}
+  ],
+  "7": [
+    {"usuario": "Jorge", "comentario": "Visualmente espectacular. Pandora sigue siendo mágica.", "calificacion": 5},
+    {"usuario": "Valeria", "comentario": "Gran mensaje ambiental.", "calificacion": 4}
+  ],
+  "8": [
+    {"usuario": "Fernando", "comentario": "Una animación impresionante, mejor que la primera parte.", "calificacion": 5},
+    {"usuario": "Claudia", "comentario": "Excelente historia y personajes entrañables.", "calificacion": 5}
+  ]
+}
