@@ -35,7 +35,6 @@ $(document).ready(function () {
     });
 }, 500); // Pon 0 mientras pruebas
 
-
     },
     error: function (xhr, status, error) {
       console.error("Error al cargar las películas:", error);

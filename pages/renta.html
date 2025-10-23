@@ -32,57 +32,110 @@
   </header>
 
   <main class="container py-5">
-    <h2>Formulario de Renta</h2>
-    <form>
-      <div class="mb-3">
-        <label for="nombre" class="form-label">* Nombre del cliente</label>
-        <input type="text" class="form-control" id="nombre" required>
-      </div>
+    <!-- Loader -->
+    <div id="loader" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-3">Cargando películas...</p>
+    </div>
 
-      <div class="mb-3">
-        <label for="dias" class="form-label">* Número de días de renta</label>
-        <input type="number" class="form-control" id="dias" min="1" value="1" required>
-      </div>
-
-      <div class="mb-3">
-        <label for="pago" class="form-label">* Forma de pago</label>
-        <select id="pago" class="form-select" required>
-          <option value="">Selecciona una opción</option>
-          <option value="Tarjeta">Tarjeta</option>
-          <option value="Efectivo">Efectivo</option>
-          <option value="Transferencia">Transferencia</option>
-        </select>
-      </div>
-
-      <h5>Selecciona las películas que deseas rentar</h5>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="dune">
-            <label class="form-check-label" for="dune">Dune: Parte Dos</label>
+    <!-- Formulario de Renta -->
+    <div id="formulario-renta" class="form-container" style="display: none;">
+      <h2 class="mb-4">Formulario de Renta</h2>
+      
+      <form id="form-renta">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">* Nombre del cliente</label>
+              <input type="text" class="form-control" id="nombre" required>
+              <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="email" class="form-label">* Correo electrónico</label>
+              <input type="email" class="form-control" id="email" required>
+              <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
+            </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="barbie">
-            <label class="form-check-label" for="barbie">Barbie</label>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="dias" class="form-label">* Número de días de renta</label>
+              <input type="number" class="form-control" id="dias" min="1" max="30" value="1" required>
+              <div class="form-text">Máximo 30 días por renta.</div>
+              <div class="invalid-feedback">Por favor ingresa un número válido de días (1-30).</div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="pago" class="form-label">* Forma de pago</label>
+              <select id="pago" class="form-select" required>
+                <option value="">Selecciona una opción</option>
+                <option value="Tarjeta">Tarjeta de crédito/débito</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia bancaria</option>
+                <option value="PayPal">PayPal</option>
+              </select>
+              <div class="invalid-feedback">Por favor selecciona una forma de pago.</div>
+            </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="oppenheimer">
-            <label class="form-check-label" for="oppenheimer">Oppenheimer</label>
+
+        <h4 class="mt-4 mb-3">Selecciona las películas que deseas rentar</h4>
+        
+        <!-- Filtros -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="filtro-titulo" placeholder="Buscar por título...">
+          </div>
+          <div class="col-md-6">
+            <select id="filtro-genero" class="form-select">
+              <option value="">Todos los géneros</option>
+            </select>
           </div>
         </div>
-      </div>
+        
+        <!-- Lista de películas -->
+        <div id="lista-peliculas" class="row mb-4"></div>
+        
+        <!-- Resumen de renta -->
+        <div id="resumen-renta" class="resumen-renta" style="display: none;">
+          <h5>Resumen de tu renta</h5>
+          <div id="detalles-resumen"></div>
+          <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+            <strong>Total a pagar:</strong>
+            <span id="total-pagar" class="total-destacado">$0.00</span>
+          </div>
+        </div>
 
-      <div class="mt-4 text-center">
-        <button type="submit" class="btn btn-primary">Confirmar Renta</button>
-      </div>
-    </form>
+        <div class="mt-4 text-center">
+          <button type="submit" class="btn btn-primary btn-lg px-5"><b>Confirmar Renta</b></button>
+        </div>
+      </form>
 
-    <div class="mt-3 text-center">
-      <a href="javascript:history.back()" class="btn btn-outline-secondary">Volver al detalle</a>
+      <div class="mt-3 text-center">
+        <a href="javascript:history.back()" class="btn btn-outline-secondary"><b>Volver al detalle</b></a>
+      </div>
+    </div>
+    
+    <!-- Confirmación de renta -->
+    <div id="confirmacion-renta" class="form-container text-center" style="display: none;">
+      <div class="alert alert-success alert-custom mb-4">
+        <h4 class="alert-heading">¡Renta confirmada!</h4>
+        <p class="mb-0">Tu renta ha sido procesada exitosamente.</p>
+      </div>
+      
+      <div id="detalles-confirmacion" class="mb-4 p-4 border rounded bg-light"></div>
+      
+      <div class="d-flex justify-content-center gap-3">
+        <a href="../index.html" class="btn btn-primary">Volver al inicio</a>
+        <button id="nueva-renta" class="btn btn-outline-primary">Hacer otra renta</button>
+      </div>
     </div>
   </main>
 
@@ -91,7 +144,391 @@
     <small>&copy; 2024 CinePlus. Todos los derechos reservados.</small>
   </footer>
 
+  <!-- Modal para campos obligatorios -->
+  <div class="modal fade" id="modalCamposObligatorios" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title fw-bold">⚠️ Campos obligatorios</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-3">Por favor completa todos los campos obligatorios marcados con <span class="text-danger">*</span> antes de confirmar la renta.</p>
+          <div class="alert alert-warning">
+            <h6 class="alert-heading">Faltan los siguientes campos:</h6>
+            <ul class="mb-0" id="lista-errores"></ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Entendido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmación exitosa -->
+  <div class="modal fade" id="modalRentaExitosa" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title fw-bold">✅ ¡Renta Exitosa!</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <div class="mb-3">
+            <div class="bg-success bg-opacity-25 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+              <span class="fs-1 text-success">✓</span>
+            </div>
+          </div>
+          <h5 class="text-success mb-3">¡Tu renta se ha procesado correctamente!</h5>
+          <p class="text-muted mb-0">Recibirás un correo de confirmación con los detalles de tu renta en los próximos minutos.</p>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  
+  <script>
+    $(document).ready(function() {
+      let todasPeliculas = [];
+      let peliculasFiltradas = [];
+      const urlParams = new URLSearchParams(window.location.search);
+      const peliculaId = urlParams.get('id');
+      const peliculaTitulo = urlParams.get('titulo');
+      const peliculaPrecio = urlParams.get('precio');
+      
+      // Cargar películas desde el JSON
+      function cargarPeliculas() {
+        $.ajax({
+          url: "../data/peliculas.json",
+          method: "GET",
+          dataType: "json",
+          success: function(peliculas) {
+            todasPeliculas = peliculas;
+            peliculasFiltradas = peliculas;
+            
+            // Ocultar loader y mostrar formulario
+            $('#loader').hide();
+            $('#formulario-renta').fadeIn();
+            
+            // Cargar lista de películas
+            mostrarPeliculas();
+            
+            // Cargar géneros en el filtro
+            cargarGeneros();
+            
+            // Si viene de una película específica, seleccionarla
+            if (peliculaId) {
+              $(`#pelicula-${peliculaId}`).click();
+            }
+          },
+          error: function() {
+            $('#loader').html(`
+              <div class="alert alert-danger">
+                Error al cargar las películas. Intenta nuevamente.
+              </div>
+              <a href="../index.html" class="btn btn-primary mt-3">Volver al inicio</a>
+            `);
+          }
+        });
+      }
+      
+      // Mostrar películas en la lista
+      function mostrarPeliculas() {
+        const listaPeliculas = $('#lista-peliculas');
+        listaPeliculas.empty();
+        
+        if (peliculasFiltradas.length === 0) {
+          listaPeliculas.html('<div class="col-12 text-center py-4"><p>No se encontraron películas.</p></div>');
+          return;
+        }
+        
+        peliculasFiltradas.forEach(pelicula => {
+          const esEstreno = calcularEsEstreno(pelicula);
+          const precio = esEstreno ? pelicula.precios.estreno : pelicula.precios.normal;
+          const badgeClass = esEstreno ? 'badge-estreno' : 'badge-normal';
+          const badgeText = esEstreno ? 'Estreno' : 'Regular';
+          
+          const peliculaHTML = `
+            <div class="col-md-6 col-lg-4 mb-3">
+              <div class="pelicula-item" id="pelicula-${pelicula.id}">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="${pelicula.id}" id="check-${pelicula.id}">
+                  <label class="form-check-label w-100" for="check-${pelicula.id}">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                      <h6 class="mb-0">${pelicula.titulo}</h6>
+                      <span class="badge ${badgeClass}">${badgeText}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">${pelicula.generos.join(', ')}</small>
+                      <span class="precio-tag">$${precio.toFixed(2)}</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          `;
+          
+          listaPeliculas.append(peliculaHTML);
+        });
+        
+        // Agregar eventos a los checkboxes
+        $('.form-check-input').change(function() {
+          const peliculaItem = $(this).closest('.pelicula-item');
+          if ($(this).is(':checked')) {
+            peliculaItem.addClass('selected');
+          } else {
+            peliculaItem.removeClass('selected');
+          }
+          actualizarResumen();
+        });
+      }
+      
+      // Cargar géneros en el filtro
+      function cargarGeneros() {
+        const generos = [];
+        todasPeliculas.forEach(pelicula => {
+          pelicula.generos.forEach(genero => {
+            if (!generos.includes(genero)) {
+              generos.push(genero);
+            }
+          });
+        });
+        
+        generos.sort();
+        const filtroGenero = $('#filtro-genero');
+        
+        generos.forEach(genero => {
+          filtroGenero.append(`<option value="${genero}">${genero}</option>`);
+        });
+      }
+      
+      // Calcular si una película es estreno
+      function calcularEsEstreno(pelicula) {
+        const hoy = new Date();
+        const estrenoDate = new Date(pelicula.estreno);
+        
+        if (isNaN(estrenoDate.getTime())) {
+          return false;
+        }
+        
+        const diffDays = Math.floor((hoy - estrenoDate) / (1000 * 60 * 60 * 24));
+        return diffDays >= 0 && diffDays <= 29;
+      }
+      
+      // Actualizar resumen de renta
+      function actualizarResumen() {
+        const dias = parseInt($('#dias').val()) || 1;
+        const peliculasSeleccionadas = $('.form-check-input:checked');
+        
+        if (peliculasSeleccionadas.length === 0) {
+          $('#resumen-renta').hide();
+          return;
+        }
+        
+        let detallesHTML = '';
+        let total = 0;
+        
+        peliculasSeleccionadas.each(function() {
+          const peliculaId = $(this).val();
+          const pelicula = todasPeliculas.find(p => p.id == peliculaId);
+          
+          if (pelicula) {
+            const esEstreno = calcularEsEstreno(pelicula);
+            const precio = esEstreno ? pelicula.precios.estreno : pelicula.precios.normal;
+            const subtotal = precio * dias;
+            total += subtotal;
+            
+            detallesHTML += `
+              <div class="d-flex justify-content-between mb-2">
+                <span>${pelicula.titulo}</span>
+                <span>$${subtotal.toFixed(2)}</span>
+              </div>
+            `;
+          }
+        });
+        
+        $('#detalles-resumen').html(detallesHTML);
+        $('#total-pagar').text(`$${total.toFixed(2)}`);
+        $('#resumen-renta').fadeIn();
+      }
+      
+      // Filtrar películas
+      function filtrarPeliculas() {
+        const texto = $('#filtro-titulo').val().toLowerCase();
+        const genero = $('#filtro-genero').val();
+        
+        peliculasFiltradas = todasPeliculas.filter(pelicula => {
+          const coincideTitulo = pelicula.titulo.toLowerCase().includes(texto);
+          const coincideGenero = !genero || pelicula.generos.includes(genero);
+          
+          return coincideTitulo && coincideGenero;
+        });
+        
+        mostrarPeliculas();
+        actualizarResumen();
+      }
+      
+      // Validar y procesar formulario
+      $('#form-renta').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Validaciones
+        const nombre = $('#nombre').val().trim();
+        const email = $('#email').val().trim();
+        const dias = $('#dias').val();
+        const pago = $('#pago').val();
+        const peliculasSeleccionadas = $('.form-check-input:checked');
+        
+        let esValido = true;
+        let errores = [];
+        
+        // Validar nombre
+        if (nombre === '') {
+          $('#nombre').addClass('is-invalid');
+          esValido = false;
+          errores.push('Nombre del cliente');
+        } else {
+          $('#nombre').removeClass('is-invalid');
+        }
+        
+        // Validar email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          $('#email').addClass('is-invalid');
+          esValido = false;
+          errores.push('Correo electrónico válido');
+        } else {
+          $('#email').removeClass('is-invalid');
+        }
+        
+        // Validar días
+        if (dias < 1 || dias > 30) {
+          $('#dias').addClass('is-invalid');
+          esValido = false;
+          errores.push('Número de días de renta (1-30)');
+        } else {
+          $('#dias').removeClass('is-invalid');
+        }
+        
+        // Validar forma de pago
+        if (pago === '') {
+          $('#pago').addClass('is-invalid');
+          esValido = false;
+          errores.push('Forma de pago');
+        } else {
+          $('#pago').removeClass('is-invalid');
+        }
+        
+        // Validar que se seleccionó al menos una película
+        if (peliculasSeleccionadas.length === 0) {
+          esValido = false;
+          errores.push('Al menos una película seleccionada');
+        }
+        
+        if (!esValido) {
+          // Mostrar modal con campos obligatorios
+          mostrarModalCamposObligatorios(errores);
+          return;
+        }
+        
+        // Si todo es válido, mostrar confirmación exitosa
+        mostrarModalRentaExitosa(nombre, email, dias, pago, peliculasSeleccionadas);
+      });
+      
+      // Mostrar modal de campos obligatorios
+      function mostrarModalCamposObligatorios(errores) {
+        const listaErrores = $('#lista-errores');
+        listaErrores.empty();
+        
+        errores.forEach(error => {
+          listaErrores.append(`<li class="text-danger">${error}</li>`);
+        });
+        
+        $('#modalCamposObligatorios').modal('show');
+      }
+      
+      // Mostrar modal de renta exitosa
+      function mostrarModalRentaExitosa(nombre, email, dias, pago, peliculasSeleccionadas) {
+        // Primero mostrar el modal de confirmación
+        $('#modalRentaExitosa').modal('show');
+        
+        // Cuando se cierre el modal, mostrar la confirmación completa
+        $('#modalRentaExitosa').on('hidden.bs.modal', function() {
+          mostrarConfirmacionCompleta(nombre, email, dias, pago, peliculasSeleccionadas);
+        });
+      }
+      
+      // Mostrar confirmación completa de renta
+      function mostrarConfirmacionCompleta(nombre, email, dias, pago, peliculasSeleccionadas) {
+        let detallesHTML = `
+          <div class="mb-3">
+            <strong>Cliente:</strong> ${nombre}<br>
+            <strong>Email:</strong> ${email}<br>
+            <strong>Días de renta:</strong> ${dias}<br>
+            <strong>Forma de pago:</strong> ${pago}
+          </div>
+          <div class="mb-3">
+            <strong>Películas rentadas:</strong>
+            <ul class="mt-2">
+        `;
+        
+        let total = 0;
+        
+        peliculasSeleccionadas.each(function() {
+          const peliculaId = $(this).val();
+          const pelicula = todasPeliculas.find(p => p.id == peliculaId);
+          
+          if (pelicula) {
+            const esEstreno = calcularEsEstreno(pelicula);
+            const precio = esEstreno ? pelicula.precios.estreno : pelicula.precios.normal;
+            const subtotal = precio * dias;
+            total += subtotal;
+            
+            detallesHTML += `
+              <li>${pelicula.titulo} - $${precio.toFixed(2)} x ${dias} días = $${subtotal.toFixed(2)}</li>
+            `;
+          }
+        });
+        
+        detallesHTML += `
+            </ul>
+          </div>
+          <div class="border-top pt-3">
+            <div class="d-flex justify-content-between">
+              <strong>Total:</strong>
+              <strong class="total-destacado">$${total.toFixed(2)}</strong>
+            </div>
+          </div>
+        `;
+        
+        $('#detalles-confirmacion').html(detallesHTML);
+        $('#formulario-renta').hide();
+        $('#confirmacion-renta').fadeIn();
+      }
+      
+      // Eventos
+      $('#filtro-titulo').on('input', filtrarPeliculas);
+      $('#filtro-genero').change(filtrarPeliculas);
+      $('#dias').on('input', actualizarResumen);
+      
+      $('#nueva-renta').click(function() {
+        $('#confirmacion-renta').hide();
+        $('#formulario-renta').fadeIn();
+        $('#form-renta')[0].reset();
+        $('.form-check-input').prop('checked', false);
+        $('.pelicula-item').removeClass('selected');
+        $('#resumen-renta').hide();
+      });
+      
+      // Inicializar
+      cargarPeliculas();
+    });
+  </script>
+</body>  
 </html>
