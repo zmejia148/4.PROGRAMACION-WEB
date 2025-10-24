@@ -5,10 +5,9 @@
   <title>Contacto - CinePlus</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/styleCon.css">
 </head>
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.html">CinePlus</a>
@@ -17,133 +16,125 @@
       </button>
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="../index.html">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="renta.html">Renta</a></li>
-          <li class="nav-item"><a class="nav-link active" href="contacto.html">Contacto</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Header -->
   <header class="bg-primary text-white text-center p-4">
-    <h1>Contacto</h1>
-    <p class="lead">¿Tienes preguntas? Nos encantaría escucharte</p>
+    <h1>Películas en Cartelera</h1>
+    <p class="lead">Consulta los estrenos y favoritos del público</p>
   </header>
 
   <main class="container py-5">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6">
-        <div class="card shadow">
-          <div class="card-body p-4">
-            <h2 class="card-title text-center mb-4">Formulario de Contacto</h2>
-            <form id="form-contacto" novalidate>
-              <div class="mb-3">
-                <label for="nombre" class="form-label">* Nombre completo</label>
-                <input type="text" class="form-control" id="nombre" required>
-                <div class="invalid-feedback">Por favor ingresa tu nombre completo.</div>
-              </div>
-              
-              <div class="mb-3">
-                <label for="correo" class="form-label">* Correo electrónico</label>
-                <input type="email" class="form-control" id="correo" required>
-                <div class="invalid-feedback">Por favor ingresa un correo electrónico válido.</div>
-              </div>
-              
-              <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono (opcional)</label>
-                <input type="tel" class="form-control" id="telefono" placeholder="+52 123 456 7890">
-              </div>
-              
-              <div class="mb-3">
-                <label for="asunto" class="form-label">* Asunto</label>
-                <select class="form-select" id="asunto" required>
-                  <option value="">Selecciona un asunto</option>
-                  <option value="soporte">Soporte técnico</option>
-                  <option value="sugerencia">Sugerencia</option>
-                  <option value="queja">Queja o reclamo</option>
-                  <option value="informacion">Información general</option>
-                  <option value="otros">Otros</option>
-                </select>
-                <div class="invalid-feedback">Por favor selecciona un asunto.</div>
-              </div>
-              
-              <div class="mb-3">
-                <label for="mensaje" class="form-label">* Mensaje</label>
-                <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
-                <div class="form-text">El mensaje debe tener entre 20 y 500 caracteres.</div>
-                <div class="invalid-feedback">Por favor escribe un mensaje entre 20 y 500 caracteres.</div>
-              </div>
-              
-              <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="newsletter">
-                <label class="form-check-label" for="newsletter">
-                  Suscribirme al newsletter de CinePlus
-                </label>
-              </div>
+        <div class="form-contacto-container">
+          <h2 class="text-center mb-4 fw-bold titulo-contacto">Formulario de Contacto</h2>
+          <form id="form-contacto" novalidate>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">* Nombre completo</label>
+              <input type="text" class="form-control" id="nombre" required>
+              <div class="invalid-feedback">Por favor ingresa tu nombre completo.</div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="correo" class="form-label">* Correo electrónico</label>
+              <input type="email" class="form-control" id="correo" required>
+              <div class="invalid-feedback">Por favor ingresa un correo electrónico válido.</div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono (opcional)</label>
+              <input type="tel" class="form-control" id="telefono" placeholder="+52 123 456 7890">
+            </div>
+            
+            <div class="mb-3">
+              <label for="asunto" class="form-label">* Asunto</label>
+              <select class="form-select" id="asunto" required>
+                <option value="">Selecciona un asunto</option>
+                <option value="soporte">Soporte técnico</option>
+                <option value="sugerencia">Sugerencia</option>
+                <option value="queja">Queja o reclamo</option>
+                <option value="informacion">Información general</option>
+                <option value="otros">Otros</option>
+              </select>
+              <div class="invalid-feedback">Por favor selecciona un asunto.</div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="mensaje" class="form-label">* Mensaje</label>
+              <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+              <div class="form-text">El mensaje debe tener entre 20 y 500 caracteres.</div>
+              <div class="invalid-feedback">Por favor escribe un mensaje entre 20 y 500 caracteres.</div>
+            </div>
+            
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="newsletter">
+              <label class="form-check-label texto-newsletter" for="newsletter">
+                Suscribirme al newsletter de CinePlus
+              </label>
+            </div>
 
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg px-5">
-                  <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
-                </button>
-              </div>
-            </form>
-          </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-contacto btn-lg px-5">
+                Enviar Mensaje
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="text-center text-white py-3">
-    <small>&copy; 2024 CinePlus. Todos los derechos reservados.</small>
+  <footer class="text-center py-3">
+    <p class="mb-0">© 2025 CinePlus - Todos los derechos reservados</p>
   </footer>
 
   <!-- Modal de confirmación -->
   <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-success text-white">
-          <h5 class="modal-title" id="modalConfirmacionLabel">
-            <i class="fas fa-check-circle me-2"></i>¡Mensaje Enviado!
-          </h5>
+        <div class="modal-header text-white modal-header-confirmacion">
+          <h5 class="modal-title" id="modalConfirmacionLabel">¡Mensaje Enviado!</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center py-4">
           <div class="mb-3">
-            <div class="bg-success bg-opacity-25 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-              <span class="fs-1 text-success">✓</span>
+            <div class="icono-confirmacion">
+              <span class="fs-1 text-white">✓</span>
             </div>
           </div>
-          <h5 class="text-success mb-3">¡Se ha registrado correctamente su comentario!</h5>
+          <h5 class="mb-3 texto-exito">¡Se ha registrado correctamente su comentario!</h5>
           <p class="text-muted">Hemos recibido tu mensaje y te contactaremos en un plazo máximo de 24 horas.</p>
           <p class="text-muted mb-0">Gracias por contactar con CinePlus.</p>
         </div>
         <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-success px-4" data-bs-dismiss="modal">Continuar</button>
+          <button type="button" class="btn btn-success px-4 btn-continuar" data-bs-dismiss="modal">Continuar</button>
         </div>
       </div>
     </div>
   </div>
-
   <!-- Modal de errores -->
   <div class="modal fade" id="modalErrores" tabindex="-1" aria-labelledby="modalErroresLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-warning text-dark">
-          <h5 class="modal-title" id="modalErroresLabel">
-            <i class="fas fa-exclamation-triangle me-2"></i>Corrige los siguientes errores
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-header text-white modal-header-errores">
+          <h5 class="modal-title" id="modalErroresLabel">Corrige los siguientes errores</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="alert alert-warning">
-            <h6 class="alert-heading">Por favor completa correctamente:</h6>
+            <h6 class="alert-heading titulo-error">Por favor completa correctamente:</h6>
             <ul class="mb-0" id="listaErrores"></ul>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Entendido</button>
+          <button type="button" class="btn btn-warning px-4 btn-error" data-bs-dismiss="modal">Entendido</button>
         </div>
       </div>
     </div>
@@ -151,125 +142,6 @@
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-  
-  <script>
-    $(document).ready(function() {
-      // Inicializar modales
-      const modalConfirmacion = new bootstrap.Modal(document.getElementById('modalConfirmacion'));
-      const modalErrores = new bootstrap.Modal(document.getElementById('modalErrores'));
-      
-      // Validación en tiempo real
-      $('#nombre, #correo, #asunto, #mensaje').on('input', function() {
-        if ($(this).hasClass('is-invalid')) {
-          validarCampo($(this));
-        }
-      });
-      
-      // Envío del formulario
-      $('#form-contacto').on('submit', function(e) {
-        e.preventDefault();
-        
-        let esValido = true;
-        let errores = [];
-        
-        // Validar campos
-        esValido = validarCampo($('#nombre')) && esValido;
-        esValido = validarCampo($('#correo')) && esValido;
-        esValido = validarCampo($('#asunto')) && esValido;
-        esValido = validarCampo($('#mensaje')) && esValido;
-        
-        if (!esValido) {
-          // Mostrar modal de errores
-          const listaErrores = $('#listaErrores');
-          listaErrores.empty();
-          
-          // Recolectar errores específicos
-          if (!$('#nombre').val().trim()) {
-            errores.push('Nombre completo');
-          }
-          if (!$('#correo').val().trim() || !validarEmail($('#correo').val())) {
-            errores.push('Correo electrónico válido');
-          }
-          if (!$('#asunto').val()) {
-            errores.push('Asunto');
-          }
-          if (!$('#mensaje').val().trim() || $('#mensaje').val().trim().length < 20 || $('#mensaje').val().trim().length > 500) {
-            errores.push('Mensaje (entre 20 y 500 caracteres)');
-          }
-          
-          errores.forEach(error => {
-            listaErrores.append(`<li class="text-danger">${error}</li>`);
-          });
-          
-          modalErrores.show();
-          return;
-        }
-        
-        // Si todo es válido, mostrar confirmación
-        modalConfirmacion.show();
-        
-        // Opcional: Aquí podrías enviar los datos a un servidor
-        console.log('Datos del formulario:', {
-          nombre: $('#nombre').val(),
-          correo: $('#correo').val(),
-          telefono: $('#telefono').val(),
-          asunto: $('#asunto').val(),
-          mensaje: $('#mensaje').val(),
-          newsletter: $('#newsletter').is(':checked')
-        });
-        
-        // Limpiar formulario después de enviar
-        setTimeout(() => {
-          $('#form-contacto')[0].reset();
-          $('.form-control').removeClass('is-valid is-invalid');
-        }, 1000);
-      });
-      
-      // Función para validar campos individuales
-      function validarCampo($campo) {
-        const valor = $campo.val().trim();
-        let esValido = true;
-        
-        if ($campo.attr('id') === 'nombre') {
-          esValido = valor !== '';
-          mostrarEstadoCampo($campo, esValido, 'Por favor ingresa tu nombre completo.');
-        }
-        else if ($campo.attr('id') === 'correo') {
-          esValido = valor !== '' && validarEmail(valor);
-          mostrarEstadoCampo($campo, esValido, 'Por favor ingresa un correo electrónico válido.');
-        }
-        else if ($campo.attr('id') === 'asunto') {
-          esValido = valor !== '';
-          mostrarEstadoCampo($campo, esValido, 'Por favor selecciona un asunto.');
-        }
-        else if ($campo.attr('id') === 'mensaje') {
-          esValido = valor !== '' && valor.length >= 20 && valor.length <= 500;
-          mostrarEstadoCampo($campo, esValido, 'El mensaje debe tener entre 20 y 500 caracteres.');
-        }
-        
-        return esValido;
-      }
-      
-      // Función para mostrar estado del campo
-      function mostrarEstadoCampo($campo, esValido, mensajeError) {
-        if (esValido) {
-          $campo.removeClass('is-invalid');
-          $campo.addClass('is-valid');
-          $campo.next('.invalid-feedback').text('');
-        } else {
-          $campo.removeClass('is-valid');
-          $campo.addClass('is-invalid');
-          $campo.next('.invalid-feedback').text(mensajeError);
-        }
-      }
-      
-      // Función para validar email
-      function validarEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-      }
-    });
-  </script>
+  <script src="../js/contacto.js"></script>
 </body>
 </html>

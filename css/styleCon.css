@@ -1,0 +1,129 @@
+/* Estilos consistentes con el tema de CinePlus */
+body {
+    background: linear-gradient(90deg, #9686ce69, #9359df);
+    color: #333;
+    font-family: "Poppins", 'Times New Roman', Times, serif;
+}
+
+/* Navbar */
+nav {
+    background: linear-gradient(90deg, #9359df, #7100b3);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    transition: color 0.2s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #e6cdec !important;
+}
+
+
+header {
+    background: linear-gradient(90deg, #9359df, #7100b3);
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.1rem;
+}
+
+.form-contacto-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.form-contacto-container .form-label {
+    color: #333333;
+    font-weight: 600;
+}
+
+.form-contacto-container .form-control,
+.form-contacto-container .form-select {
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+    padding: 0.75rem;
+}
+
+.form-contacto-container .form-control:focus,
+.form-contacto-container .form-select:focus {
+    border-color: #9359df;
+    box-shadow: 0 0 0 0.2rem rgba(147, 89, 223, 0.25);
+}
+
+.btn-contacto {
+    background: linear-gradient(135deg, #daaee6, #c900ff);
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-contacto:hover {
+    background: linear-gradient(135deg, #a500d4, #c9a5d6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px white;
+}
+
+/* === Estilos extraídos del HTML === */
+.titulo-contacto {
+    color: #333333;
+}
+
+.texto-newsletter {
+    color: #333333;
+}
+
+.modal-header-confirmacion {
+    background: linear-gradient(135deg, #9359df, #7100b3);
+}
+
+.icono-confirmacion {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.texto-exito {
+    color: #28a745;
+}
+
+.btn-continuar {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: none;
+}
+
+.modal-header-errores {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.titulo-error {
+    color: #9059d8;
+}
+
+.btn-error {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    border: none;
+    color: #212529;
+}
+
+a {
+    font-weight: 700;
+}

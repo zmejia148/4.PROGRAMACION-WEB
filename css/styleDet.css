@@ -1,0 +1,117 @@
+/* === Estilos generales CinePlus === */
+body {
+    background-color: #9686ce69;
+    color: #333;
+    font-family: "Poppins", 'Times New Roman', Times, serif;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(135deg, #7100b3, #9359df);
+}
+
+.navbar .nav-link.active {
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+}
+
+/* Título principal */
+.titulo-detalle {
+    color: #333333;
+    font-weight: 700;
+}
+
+/* Tarjeta de detalle */
+.detalle-card {
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Subtítulos */
+.subtitulo {
+    color: #7100b3;
+    font-weight: 600;
+}
+
+/* Sinopsis */
+.texto-sinopsis {
+    font-size: 1rem;
+    color: #444;
+}
+
+/* Género */
+.genero {
+    background: linear-gradient(135deg, #9359df, #7100b3);
+    color: #fff;
+    border-radius: 8px;
+    padding: 0.4em 0.6em;
+    font-size: 0.85rem;
+}
+
+/* Botones */
+.btn-volver {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-volver:hover {
+    background: linear-gradient(135deg, #5a6268, #4e555b);
+    transform: translateY(-2px);
+}
+
+.btn-rentar {
+    background: linear-gradient(135deg, #c900ff, #a500d4);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-rentar:hover {
+    background: linear-gradient(135deg, #a500d4, #8500b4);
+    transform: translateY(-2px);
+}
+
+/* Alertas dinámicas */
+.alert-estreno {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: #fff;
+    font-weight: 500;
+}
+
+.alert-normal {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Reseñas */
+.reseña {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(90deg, #9359df, #7100b3);
+    color: #f1f1f1;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+a {
+    font-weight: 700;
+}
