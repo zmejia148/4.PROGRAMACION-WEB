@@ -1,4 +1,7 @@
-Descripción
+**************** LINK REPOSITORIO GITHUB **************************
+https://github.com/zmejia148/4.PROGRAMACION-WEB
+
+------------  Descripción  ------------
 CinePlus es una aplicación web para consultar películas en cartelera, ver detalles, tráilers, etc.
 
 Estructura del Proyecto
