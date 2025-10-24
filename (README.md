@@ -1,6 +1,11 @@
 **************** LINK REPOSITORIO GITHUB **************************
 https://github.com/zmejia148/4.PROGRAMACION-WEB
 
+//// DATOS ESTUDIANTE /////
+NOMBRE: MEJIA MOROCHO ZAIDA STEPHANIA
+CARRERA: SOFTWARE
+SEMESTRE: CUARTO SEMESTRE
+
 ------------  Descripción  ------------
 CinePlus es una aplicación web para consultar películas en cartelera, ver detalles, tráilers, etc.
 
