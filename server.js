@@ -56,7 +56,7 @@ next();
 
 // Routes
 app.use('/', require('./routes/index'));
-app.use('/auth', require('./routes/auth'));
+app.use('/auth', require('./routes/auth.js'));
 app.use('/products', require('./routes/products'));
 
 

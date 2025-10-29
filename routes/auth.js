@@ -1,20 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { body } = require('express-validator');
 const authController = require('../controllers/authController');
+console.log('authController importado:', authController);
 
-
+// Login
 router.get('/login', authController.getLogin);
+router.post('/login', authController.postLogin);
 
+// Registro
+router.get('/register', authController.getRegister);
+router.post('/register', authController.postRegister);
 
-router.post('/login',
-body('username').notEmpty().withMessage('Ingrese usuario'),
-body('password').notEmpty().withMessage('Ingrese contraseña'),
-authController.postLogin
-);
-
-
+// Logout
 router.get('/logout', authController.logout);
-
 
 module.exports = router;
