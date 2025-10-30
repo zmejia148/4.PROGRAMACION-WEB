@@ -53,9 +53,8 @@ exports.getRegister = (req, res) => {
 exports.postRegister = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const hashed = await bcrypt.hash(password, 10);
 
-        await User.create({ username, password: hashed });
+        await User.create({ username, password });
         console.log('✅ Usuario registrado:', username);
 
         res.redirect('/auth/login');
@@ -63,4 +62,18 @@ exports.postRegister = async (req, res) => {
         console.error('❌ Error en postRegister:', error);
         res.render('auth/register', { error: 'Error al registrar usuario' });
     }
+};
+
+exports.mostrarHome = (req, res) => {
+    if (!req.session.usuario) {
+        return res.redirect('/auth/login');
+    }
+    res.render('home', { usuario: req.session.usuario });
+};
+
+exports.mostrarProduct = (req, res) => {
+    if (!req.session.usuario) {
+        return res.redirect('/product/form');
+    }
+    res.render('home', { usuario: req.session.usuario });
 };

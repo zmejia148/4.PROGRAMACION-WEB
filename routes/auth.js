@@ -14,4 +14,10 @@ router.post('/register', authController.postRegister);
 // Logout
 router.get('/logout', authController.logout);
 
+// Ruta protegida del home
+router.get('/layouts', authController.mostrarHome);
+
+// Ruta protegida del Form productos
+router.get('/products', authController.mostrarProduct);
+
 module.exports = router;
