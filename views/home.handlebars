@@ -1,0 +1,28 @@
+<div class="container mt-5 text-center">
+
+    {{#if loggedIn}}
+    <h1 class="mb-3">👋 ¡Bienvenido, {{user.username}}!</h1>
+    <p class="lead mb-4">Gestiona tus productos y chatea con otros usuarios en tiempo real.</p>
+
+    <div class="d-flex justify-content-center gap-3">
+        <a href="/products/list" class="btn btn-primary btn-lg">
+            🛒 Ir a Productos
+        </a>
+        <a href="/chat" class="btn btn-success btn-lg">
+            💬 Ir al Chat
+        </a>
+        <a href="/auth/logout" class="btn btn-danger btn-lg">
+            🚪 Cerrar sesión
+        </a>
+    </div>
+
+    {{else}}
+    <h1 class="mb-3">Bienvenido a <strong>MiInventarioExpress</strong></h1>
+    <p class="lead mb-4">Administra tus productos de forma rápida y chatea con tus compañeros.</p>
+
+    <div class="d-flex justify-content-center gap-3">
+        <a href="/auth/login" class="btn btn-success btn-lg">Iniciar sesión</a>
+        <a href="/auth/register" class="btn btn-secondary btn-lg">Registrarse</a>
+    </div>
+    {{/if}}
+</div>

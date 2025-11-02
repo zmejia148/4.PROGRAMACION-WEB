@@ -1,0 +1,42 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">{{title}}</h2>
+
+        <div>
+            <a href="/products/form" class="btn btn-success me-2">
+                ➕ Agregar producto
+            </a>
+            <a href="/chat" class="btn btn-secondary me-2">
+                💬 Chat
+            </a>
+            <a href="/" class="btn btn-outline-dark">🏠 Volver al inicio</a>
+
+        </div>
+    </div>
+
+    {{#if productos.length}}
+    <div class="row">
+        {{#each productos}}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100 border-0">
+                <img src="{{imagen}}" class="card-img-top" alt="{{nombre}}" style="height: 200px; object-fit: cover;" />
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">{{nombre}}</h5>
+                    <p class="text-muted mb-1">${{precio}}</p>
+                    <p class="card-text small">{{descripcion}}</p>
+                    <div class="mt-2">
+                        <a href="/products/edit/{{_id}}" class="btn btn-warning btn-sm">✏️ Editar</a>
+                        <a href="/products/delete/{{_id}}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('¿Seguro que deseas eliminar este producto?')">🗑️ Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{else}}
+    <div class="alert alert-warning text-center p-3 rounded-3">
+        No hay productos registrados aún.
+    </div>
+    {{/if}}
+</div>

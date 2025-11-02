@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
 const path = require('path');
-const Producto = require('../models/Product');
+const multer = require('multer');
+const Product = require('../models/product');
 
-// Configuración de Multer (subida de imágenes)
+// ==============================
+// 🔧 CONFIGURACIÓN DE MULTER
+// ==============================
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, 'public/uploads'),
     filename: (req, file, cb) => {
@@ -25,30 +27,90 @@ const upload = multer({
     }
 });
 
-// Mostrar formulario de nuevo producto
-router.get('/nuevo', (req, res) => {
-    if (!req.session.usuario) return res.redirect('/auth/login');
-    res.render('product/nuevo');
+// Redirige /products → /products/list
+router.get('/', (req, res) => {
+    res.redirect('/products/list');
 });
 
-// Crear producto
+// ==============================
+// 📋 LISTAR PRODUCTOS
+// ==============================
+router.get('/list', async (req, res) => {
+    const productos = await Product.find().lean();
+    res.render('products/list', { title: 'Lista de productos' });
+});
+
+// ==============================
+// 🧾 MOSTRAR FORMULARIO NUEVO
+// ==============================
+router.get('/form', (req, res) => {
+    res.render('products/form', { title: 'Agregar producto' });
+});
+
+// ==============================
+// 💾 GUARDAR PRODUCTO NUEVO
+// ==============================
 router.post('/', upload.single('imagen'), async (req, res) => {
     try {
         const { nombre, precio, descripcion } = req.body;
-        const imagen = req.file ? `/uploads/${req.file.filename}` : 'default.png';
-        await Producto.create({ nombre, precio, descripcion, imagen });
-        res.redirect('/productos');
-    } catch (error) {
-        console.error(error);
+        const imagen = req.file ? `/uploads/${req.file.filename}` : '/uploads/default.png';
+
+        const nuevoProducto = new Product({ nombre, precio, descripcion, imagen });
+        await nuevoProducto.save();
+
+        res.redirect('/products/list');
+    } catch (err) {
+        console.error('❌ Error al guardar el producto:', err);
         res.status(500).send('Error al guardar el producto');
     }
 });
 
-// Listar productos
-router.get('/', async (req, res) => {
-    if (!req.session.usuario) return res.redirect('/auth/login');
-    const productos = await Producto.find().lean();
-    res.render('productos/lista', { productos });
+// ==============================
+// ✏️ FORMULARIO EDITAR PRODUCTO
+// ==============================
+router.get('/edit/:id', async (req, res) => {
+    try {
+        const producto = await Product.findById(req.params.id).lean();
+        if (!producto) return res.status(404).send('Producto no encontrado');
+        res.render('products/form', { producto, editMode: true });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error al cargar el formulario de edición');
+    }
+});
+
+// ==============================
+// 🔁 ACTUALIZAR PRODUCTO
+// ==============================
+router.post('/edit/:id', upload.single('imagen'), async (req, res) => {
+    try {
+        const { nombre, precio, descripcion } = req.body;
+        const productoActualizado = {
+            nombre,
+            precio,
+            descripcion,
+        };
+        if (req.file) productoActualizado.imagen = `/uploads/${req.file.filename}`;
+
+        await Product.findByIdAndUpdate(req.params.id, productoActualizado);
+        res.redirect('/products/list');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error al actualizar el producto');
+    }
+});
+
+// ==============================
+// 🗑️ ELIMINAR PRODUCTO
+// ==============================
+router.get('/delete/:id', async (req, res) => {
+    try {
+        await Product.findByIdAndDelete(req.params.id);
+        res.redirect('/products/list');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error al eliminar el producto');
+    }
 });
 
 module.exports = router;

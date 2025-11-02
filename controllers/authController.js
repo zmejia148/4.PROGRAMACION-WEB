@@ -1,18 +1,24 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-// Mostrar formulario de login
+// ============================
+// 🧩 FORMULARIO DE LOGIN
+// ============================
 exports.getLogin = (req, res) => {
-    res.render('auth/login');
+    // Si ya está logueado, redirige al home
+    if (req.session.user) {
+        return res.redirect('/home');
+    }
+    res.render('auth/login', { title: 'Iniciar sesión' });
 };
 
-// Procesar login
+// ============================
+// 🔐 PROCESAR LOGIN
+// ============================
 exports.postLogin = async (req, res) => {
     try {
         const { username, password } = req.body;
-
-        console.log('🔍 Comparando contraseñas:');
-        console.log('Ingresada:', password);
+        console.log(`🟡 Intentando login de: ${username}`);
 
         const user = await User.findOne({ username });
         if (!user) {
@@ -20,60 +26,69 @@ exports.postLogin = async (req, res) => {
             return res.render('auth/login', { error: 'Usuario no encontrado' });
         }
 
-        console.log('Hash guardado:', user.password);
-
         const match = await bcrypt.compare(password, user.password);
-        console.log('Resultado bcrypt.compare:', match);
+        console.log('🔑 Coincidencia contraseña:', match);
 
         if (!match) {
             return res.render('auth/login', { error: 'Contraseña incorrecta' });
         }
 
-        req.session.user = user;
-        res.redirect('/products');
+        // Guardar usuario en la sesión
+        req.session.user = {
+            _id: user._id,
+            username: user.username
+        };
+
+        console.log(`✅ Usuario autenticado: ${user.username}`);
+
+        // Redirigir a la página principal
+        res.redirect('/home');
     } catch (error) {
         console.error('❌ Error en postLogin:', error);
         res.render('auth/login', { error: 'Error al iniciar sesión' });
     }
 };
 
-// Cerrar sesión
+// ============================
+// 🚪 CERRAR SESIÓN
+// ============================
 exports.logout = (req, res) => {
     req.session.destroy(() => {
         res.redirect('/auth/login');
     });
 };
 
-// Mostrar formulario de registro
+// ============================
+// 🧾 FORMULARIO DE REGISTRO
+// ============================
 exports.getRegister = (req, res) => {
-    res.render('auth/register');
+    res.render('auth/register', { title: 'Registro de usuario' });
 };
 
-// Procesar registro
+// ============================
+// 🧠 PROCESAR REGISTRO
+// ============================
 exports.postRegister = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        await User.create({ username, password });
-        console.log('✅ Usuario registrado:', username);
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.render('auth/register', { error: 'El usuario ya existe' });
+        }
 
+        // Hashear la contraseña antes de guardarla
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await User.create({
+            username,
+            password: hashedPassword
+        });
+
+        console.log(`✅ Usuario registrado correctamente: ${username}`);
         res.redirect('/auth/login');
     } catch (error) {
         console.error('❌ Error en postRegister:', error);
         res.render('auth/register', { error: 'Error al registrar usuario' });
     }
-};
-
-exports.mostrarHome = (req, res) => {
-    if (!req.session.usuario) {
-        return res.redirect('/auth/login');
-    }
-    res.render('home', { usuario: req.session.usuario });
-};
-
-exports.mostrarProduct = (req, res) => {
-    if (!req.session.usuario) {
-        return res.redirect('/product/form');
-    }
-    res.render('home', { usuario: req.session.usuario });
 };
