@@ -1,8 +1,12 @@
-<div class="container mt-5 text-center">
+<head>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<div class="home card text-center" style="width: 45rem;">
 
     {{#if loggedIn}}
-    <h1 class="mb-3">👋 ¡Bienvenido, {{user.username}}!</h1>
-    <p class="lead mb-4">Gestiona tus productos y chatea con otros usuarios en tiempo real.</p>
+    <h1 class="card-title">¡Bienvenido, {{user.username}}!</h1><br>
+    <p class="lead mb-1">Gestiona tus productos y chatea con otros usuarios en tiempo real.</p><br><br>
 
     <div class="d-flex justify-content-center gap-3">
         <a href="/products/list" class="btn btn-primary btn-lg">
@@ -10,9 +14,6 @@
         </a>
         <a href="/chat" class="btn btn-success btn-lg">
             💬 Ir al Chat
-        </a>
-        <a href="/auth/logout" class="btn btn-danger btn-lg">
-            🚪 Cerrar sesión
         </a>
     </div>
 

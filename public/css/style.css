@@ -1,5 +1,5 @@
 body {
-    background-color: #f8f9fa;
+    background-color: #cf90e217;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -23,4 +23,19 @@ body {
 
 .btn-success:hover {
     background-color: #218838;
+}
+
+nav {
+    background: linear-gradient(90deg, #dec0f7, #8a39b9);
+    font-weight: 900;
+    font-family: 'Times New Roman';
+}
+
+/* STYLOS HOME*/
+.home {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 220px;
+    padding: 50px;
 }

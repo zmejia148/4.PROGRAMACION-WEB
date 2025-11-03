@@ -9,17 +9,18 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body style="background-color:#f7f7f7;">
+<body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="/home">MiInventarioExpress</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     {{#if user}}
-                    <li class="nav-item"><a class="nav-link" href="/products/list">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/chat">Chat</a></li>
-                    <li class="nav-item"><a class="nav-link text-danger" href="/auth/logout">Cerrar sesión</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/home">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/products/list">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/chat">Chat</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/auth/logout">Cerrar sesión</a></li>
                     {{else}}
                     <li class="nav-item"><a class="nav-link" href="/auth/login">Iniciar sesión</a></li>
                     <li class="nav-item"><a class="nav-link" href="/auth/register">Registrarse</a></li>

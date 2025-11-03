@@ -86,7 +86,7 @@ io.on('connection', (socket) => {
     console.log('🟢 Nuevo cliente conectado:', socket.id);
 
     socket.on('chatMessage', (data) => {
-        io.emit('chatMessage', data); // Enviar mensaje a todos
+        io.emit('chatMessage', data); // 🔁 Reenvía a todos los conectados
     });
 
     socket.on('disconnect', () => {

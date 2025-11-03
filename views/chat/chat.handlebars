@@ -1,59 +1,148 @@
-{{#setVar "title"}}Chat en tiempo real{{/setVar}}
+<!DOCTYPE html>
+<html lang="es">
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">💬 Chat en tiempo real</h5>
-                    <a href="/auth/home" class="btn btn-light btn-sm">Volver</a>
-                </div>
-                <div class="card-body" id="chat-box"
-                    style="height: 400px; overflow-y: auto; background-color: #f7f7f7;">
-                    <ul id="messages" class="list-unstyled mb-0"></ul>
-                </div>
-                <div class="card-footer">
-                    <form id="chat-form" class="d-flex">
-                        <input type="text" id="msg" class="form-control me-2" placeholder="Escribe un mensaje..."
-                            autocomplete="off" required>
-                        <button class="btn btn-success" type="submit">Enviar</button>
-                    </form>
-                </div>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+        }
+
+        .chat-header {
+            background: #6f42c1;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #fafafa;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-input input {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px 15px;
+            outline: none;
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            border: none;
+            background-color: #6f42c1;
+            color: white;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chat-input button:hover {
+            background-color: #5a34a6;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .message.you {
+            background-color: #6f42c1;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.other {
+            background-color: #e5e5ea;
+            color: black;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            💬 Chat en Tiempo Real — {{user.username}}
+        </div>
+
+        <div id="messages" class="chat-messages"></div>
+
+        <div class="chat-input">
+            <input id="messageInput" type="text" placeholder="Escribe un mensaje..." autocomplete="off" />
+            <button id="sendBtn">Enviar</button>
         </div>
     </div>
-</div>
 
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-    const form = document.getElementById('chat-form');
-    const input = document.getElementById('msg');
-    const messages = document.getElementById('messages');
-    const chatBox = document.getElementById('chat-box');
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const username = "{{user.username}}";
+        const messagesDiv = document.getElementById("messages");
+        const input = document.getElementById("messageInput");
+        const sendBtn = document.getElementById("sendBtn");
 
-    // Obtener el usuario actual desde Handlebars (si existe)
-    const usuario = "{{user.username}}" || "Anónimo";
+        // Escuchar mensajes del servidor
+        socket.on("chatMessage", (data) => {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
 
-    // Enviar mensaje
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        if (input.value.trim() !== '') {
-            socket.emit('chatMessage', { user: usuario, message: input.value });
-            input.value = '';
-        }
-    });
+            if (data.username === username) {
+                messageElement.classList.add("you");
+                messageElement.innerText = `Tú: ${data.message}`;
+            } else {
+                messageElement.classList.add("other");
+                messageElement.innerText = `${data.username}: ${data.message}`;
+            }
 
-    // Recibir mensajes
-    socket.on('chatMessage', data => {
-        const li = document.createElement('li');
-        li.classList.add('mb-2');
-        li.innerHTML = `
-      <div class="p-2 rounded ${data.user === usuario ? 'bg-success text-white text-end' : 'bg-light'}">
-        <strong>${data.user}:</strong> ${data.message}
-      </div>
-    `;
-        messages.appendChild(li);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    });
-</script>
+            messagesDiv.appendChild(messageElement);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        });
+
+        // Enviar mensaje
+        sendBtn.addEventListener("click", () => {
+            const message = input.value.trim();
+            if (message) {
+                socket.emit("chatMessage", { username, message });
+                input.value = "";
+            }
+        });
+
+        // Permitir enviar con Enter
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendBtn.click();
+        });
+    </script>
+</body>
+
+</html>
