@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Middleware para proteger las rutas privadas
+// 🧱 Middleware para proteger rutas privadas
 function authRequired(req, res, next) {
     if (!req.session.user) {
         return res.redirect('/auth/login');
@@ -9,15 +9,17 @@ function authRequired(req, res, next) {
     next();
 }
 
-// Página principal (si no hay sesión)
+// 🏠 Página de inicio
 router.get('/', (req, res) => {
     if (req.session.user) {
+        // Si ya inició sesión, lo redirigimos al home
         return res.redirect('/home');
     }
-    res.render('home', { title: 'Bienvenido a MiInventarioExpress' });
+    // Si no tiene sesión, enviamos al login
+    return res.redirect('/auth/login');
 });
 
-// Página de bienvenida después del login
+// 🏡 Página de bienvenida después del login
 router.get('/home', authRequired, (req, res) => {
     res.render('home', {
         title: 'Inicio',

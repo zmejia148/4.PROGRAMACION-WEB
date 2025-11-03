@@ -1,34 +1,64 @@
-<div class="col-md-6 offset-md-3">
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white text-center">
-            <h4>Agregar Nuevo Producto</h4>
-        </div>
-
-        <div class="card-body">
-            <form action="/products" method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre del producto</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Laptop Dell"
-                        required>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div
+                    class="card-header {{#if producto}}bg-warning{{else}}bg-success{{/if}} text-white text-center rounded-top-4">
+                    <h4>
+                        {{#if producto}}✏️ Editar Producto{{else}}➕ Agregar Nuevo Producto{{/if}}
+                    </h4>
                 </div>
 
-                <div class="mb-3">
-                    <label for="precio" class="form-label">Precio ($)</label>
-                    <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01" required>
+                <div class="card-body p-4">
+                    <form action="{{#if producto}}/products/edit/{{producto._id}}{{else}}/products{{/if}}" method="POST"
+                        enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label fw-semibold">Nombre del producto</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                value="{{producto.nombre}}" placeholder="Ej: Laptop Dell" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="precio" class="form-label fw-semibold">Precio ($)</label>
+                            <input type="number" class="form-control" id="precio" name="precio" min="0" step="0.01"
+                                value="{{producto.precio}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label fw-semibold">Descripción</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"
+                                placeholder="Escribe una breve descripción..."
+                                required>{{producto.descripcion}}</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="imagen" class="form-label fw-semibold">Imagen del producto</label>
+                            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+
+                            {{#if producto.imagen}}
+                            <div class="mt-3 text-center">
+                                <p class="text-muted mb-1">Imagen actual:</p>
+                                <img src="{{producto.imagen}}" alt="Imagen actual" class="img-thumbnail"
+                                    style="width:150px; height:150px; object-fit:cover;">
+                            </div>
+                            {{/if}}
+
+                            <div class="form-text text-muted">Opcional: si no subes imagen, se mantendrá la actual o se
+                                usará una por defecto.</div>
+                        </div>
+
+                        <button type="submit"
+                            class="btn {{#if producto}}btn-warning{{else}}btn-success{{/if}} w-100 mt-2">
+                            {{#if producto}}💾 Actualizar Producto{{else}}💾 Guardar Producto{{/if}}
+                        </button>
+                    </form>
                 </div>
 
-                <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripción</label>
-                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                <div class="card-footer text-center bg-light">
+                    <a href="/products/list" class="btn btn-outline-secondary">← Volver a la lista</a>
                 </div>
-
-                <div class="mb-3">
-                    <label for="imagen" class="form-label">Imagen del producto</label>
-                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
-                </div>
-
-                <button type="submit" class="btn btn-success w-100">Guardar Producto</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
