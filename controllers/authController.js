@@ -72,20 +72,9 @@ exports.postRegister = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        const existingUser = await User.findOne({ username });
-        if (existingUser) {
-            return res.render('auth/register', { error: 'El usuario ya existe' });
-        }
+        await User.create({ username, password });
+        console.log('✅ Usuario registrado:', username);
 
-        // Hashear la contraseña antes de guardarla
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        await User.create({
-            username,
-            password: hashedPassword
-        });
-
-        console.log(`✅ Usuario registrado correctamente: ${username}`);
         res.redirect('/auth/login');
     } catch (error) {
         console.error('❌ Error en postRegister:', error);

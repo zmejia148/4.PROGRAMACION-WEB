@@ -19,7 +19,10 @@
         {{#each productos}}
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm h-100 border-0">
-                <img src="{{imagen}}" class="card-img-top" alt="{{nombre}}" style="height: 200px; object-fit: cover;" />
+                <div class="product-image-container">
+                    <img src="{{imagen}}" class="card-img-top" alt="{{nombre}}"
+                        style="height: 200px; object-fit: cover;" />
+                </div>
                 <div class="card-body text-center">
                     <h5 class="card-title fw-bold">{{nombre}}</h5>
                     <p class="text-muted mb-1">${{precio}}</p>
