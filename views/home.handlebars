@@ -1,29 +1,30 @@
-<head>
-    <link rel="stylesheet" href="/public/css/style.css">
-</head>
+<div class="home">
+    <div class="card shadow-sm text-center">
+        <div class="container">
+            <div class="card-body">
+                {{#if loggedIn}}
+                <h1 class="card-title">¡Bienvenid@, {{user.username}}!</h1><br>
+                <p class="lead mb-1">Gestiona tus productos y chatea con otros usuarios en tiempo real.</p><br><br>
 
-<div class="home card text-center" style="width: 45rem;">
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="/products/list" class="btn btn-primary btn-lg">
+                        🛒 Ir a Productos
+                    </a>
+                    <a href="/chat" class="btn btn-success btn-lg">
+                        💬 Ir al Chat
+                    </a>
+                </div>
 
-    {{#if loggedIn}}
-    <h1 class="card-title">¡Bienvenido, {{user.username}}!</h1><br>
-    <p class="lead mb-1">Gestiona tus productos y chatea con otros usuarios en tiempo real.</p><br><br>
+                {{else}}
+                <h1 class="mb-3">Bienvenido a <strong>MiInventarioExpress</strong></h1>
+                <p class="lead mb-4">Administra tus productos de forma rápida y chatea con tus compañeros.</p>
 
-    <div class="d-flex justify-content-center gap-3">
-        <a href="/products/list" class="btn btn-primary btn-lg">
-            🛒 Ir a Productos
-        </a>
-        <a href="/chat" class="btn btn-success btn-lg">
-            💬 Ir al Chat
-        </a>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="/auth/login" class="btn btn-success btn-lg">Iniciar sesión</a>
+                    <a href="/auth/register" class="btn btn-secondary btn-lg">Registrarse</a>
+                </div>
+                {{/if}}
+            </div>
+        </div>
     </div>
-
-    {{else}}
-    <h1 class="mb-3">Bienvenido a <strong>MiInventarioExpress</strong></h1>
-    <p class="lead mb-4">Administra tus productos de forma rápida y chatea con tus compañeros.</p>
-
-    <div class="d-flex justify-content-center gap-3">
-        <a href="/auth/login" class="btn btn-success btn-lg">Iniciar sesión</a>
-        <a href="/auth/register" class="btn btn-secondary btn-lg">Registrarse</a>
-    </div>
-    {{/if}}
 </div>

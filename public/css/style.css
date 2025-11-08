@@ -1,41 +1,89 @@
-body {
-    background-color: #cf90e217;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.card {
-    border-radius: 12px;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #0069d9;
-}
-
-.btn-success {
-    background-color: #28a745;
-    border: none;
-}
-
-.btn-success:hover {
-    background-color: #218838;
-}
-
 nav {
     background: linear-gradient(90deg, #dec0f7, #8a39b9);
     font-weight: 900;
     font-family: 'Times New Roman';
 }
 
-/* STYLOS HOME*/
-.home {
-    display: block;
+.page-login .container {
     justify-content: center;
     align-items: center;
-    margin: 220px;
-    padding: 50px;
+    display: grid;
+    place-items: center;
+    height: 60vh;
+}
+
+.page-login .card {
+    font-family: 'Times New Roman';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-register .cord {
+    font-family: 'Times New Roman';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* STYLOS HOME*/
+.home .container {
+    justify-content: center;
+    align-items: center;
+    display: grid;
+    place-items: center;
+    height: 40vh;
+}
+
+.home .card {
+    font-family: 'Times New Roman';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-list {
+    font-family: 'Times New Roman';
+}
+
+.list-card .product-image-container {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    border-radius: 10px 10px 0 0;
+}
+
+.list-card .product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px 10px 0 0;
+    transition: transform 0.3s ease;
+}
+
+/* Estilos solo para la página de lista de productos */
+.page-products .product-image-container {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.page-products .product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background-color: #fff;
 }

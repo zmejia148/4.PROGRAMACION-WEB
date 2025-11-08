@@ -1,46 +1,56 @@
-<div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">{{title}}</h2>
-
-        <div>
-            <a href="/products/form" class="btn btn-success me-2">
-                ➕ Agregar producto
-            </a>
-            <a href="/chat" class="btn btn-secondary me-2">
-                💬 Chat
-            </a>
-            <a href="/" class="btn btn-outline-dark">🏠 Volver al inicio</a>
-
+<div class="page-products"> <!-- 🔹 Clase raíz única para esta vista -->
+    <div class="container mt-2">
+        <div class="text-center">
+            <h2 class="fw-bold">{{title}}</h2>
         </div>
-    </div>
+    </div><br><br>
+
+    <div class="container mt-3 mb-4">
+        <a href="/products/form" class="btn btn-success me-2">
+            ➕ Agregar producto
+        </a>
+        <a href="/chat" class="btn btn-secondary me-2">
+            💬 Chat
+        </a>
+        <a href="/" class="btn btn-outline-dark">
+            🏠 Volver al inicio
+        </a>
+    </div><br>
 
     {{#if productos.length}}
-    <div class="row">
-        {{#each productos}}
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100 border-0">
-                <div class="product-image-container">
-                    <img src="{{imagen}}" class="card-img-top" alt="{{nombre}}"
-                        style="height: 200px; object-fit: cover;" />
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title fw-bold">{{nombre}}</h5>
-                    <p class="text-muted mb-1">${{precio}}</p>
-                    <p class="card-text small">{{descripcion}}</p>
-                    <div class="mt-2">
-                        <a href="/products/edit/{{_id}}" class="btn btn-warning btn-sm">✏️ Editar</a>
-                        <a href="/products/delete/{{_id}}" class="btn btn-danger btn-sm"
-                            onclick="return confirm('¿Seguro que deseas eliminar este producto?')">🗑️ Eliminar</a>
+    <div class="container">
+        <div class="row">
+            {{#each productos}}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card shadow-sm border-0 product-card">
+
+                    <!-- 🔹 Contenedor de imagen adaptativo -->
+                    <div class="product-image-container">
+                        <img src="{{imagen}}" alt="{{nombre}}">
                     </div>
 
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">{{nombre}}</h5>
+                        <p class="text-success fw-semibold mb-1">$ {{precio}}</p>
+                        <p class="text-muted small">{{descripcion}}</p>
+
+                        <div class="mt-2 d-flex justify-content-center gap-2">
+                            <a href="/products/edit/{{_id}}" class="btn btn-warning btn-sm">✏️ Editar</a>
+                            <a href="/products/delete/{{_id}}" class="btn btn-danger btn-sm"
+                                onclick="return confirm('¿Seguro que deseas eliminar este producto?')">🗑️ Eliminar</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {{/each}}
         </div>
-        {{/each}}
     </div>
+
     {{else}}
-    <div class="alert alert-warning text-center p-3 rounded-3">
-        No hay productos registrados aún.
+    <div class="container">
+        <div class="alert alert-warning text-center p-3 rounded-3 mt-4">
+            No hay productos registrados aún.
+        </div>
     </div>
     {{/if}}
 </div>
