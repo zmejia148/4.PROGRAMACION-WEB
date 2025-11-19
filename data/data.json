@@ -1,0 +1,36 @@
+{
+    "categories": [
+        {
+            "id": "1",
+            "name": "Tecnología"
+        },
+        {
+            "id": "2",
+            "name": "Accesorios"
+        },
+        {
+            "id": "3",
+            "name": "Hogar"
+        }
+    ],
+    "products": [
+        {
+            "id": "101",
+            "name": "Teclado Gamer",
+            "description": "RGB - Mecánico",
+            "price": 45.99,
+            "imageUrl": "https://picsum.photos/400",
+            "categoryId": "1",
+            "stock": 10
+        },
+        {
+            "id": "102",
+            "name": "Mouse Inalámbrico",
+            "description": "Ergonómico",
+            "price": 19.99,
+            "imageUrl": "https://picsum.photos/401",
+            "categoryId": "2",
+            "stock": 25
+        }
+    ]
+}
