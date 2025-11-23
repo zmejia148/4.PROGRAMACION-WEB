@@ -1,24 +1,36 @@
+require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
-const morgan = require("morgan");
+const connectDB = require("./config/db");
 
 const app = express();
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(morgan("dev"));
+
+// Conectar BD
+connectDB();
 
 // Rutas
-app.use("/api/productos", require("./routes/products"));
+app.use("/api/auth", require("./routes/auth.routes"));
+app.use("/api/products", require("./routes/product.routes"));
+app.use("/api/chat", require("./routes/chat.routes"));
 
-// Conectar a MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/mercapp")
-    .then(() => console.log("MongoDB conectado ✔"))
-    .catch(err => console.log("Error MongoDB:", err));
+// Socket.io
+const http = require("http").createServer(app);
+const io = require("socket.io")(http, {
+    cors: { origin: "*" }
+});
+
+io.on("connection", (socket) => {
+    console.log("🟢 Cliente conectado:", socket.id);
+
+    socket.on("message", (msg) => {
+        io.emit("message", msg);
+    });
+});
 
 // Iniciar servidor
-app.listen(3000, () => {
-    console.log("Servidor iniciado en http://localhost:3000");
-});
+const PORT = process.env.PORT || 3000;
+http.listen(PORT, () => console.log("🚀 API lista en puerto", PORT));
