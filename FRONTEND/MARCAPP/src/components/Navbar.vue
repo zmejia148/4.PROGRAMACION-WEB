@@ -74,8 +74,7 @@
             {{ getUserInitials }}
           </div>
           <div class="user-info">
-            <span class="user-name">{{ user.username }}</span>
-            <span class="user-role">Usuario</span>
+            <h2 class="user-name">{{ user.username }}</h2>
           </div>
         </div>
       </div>

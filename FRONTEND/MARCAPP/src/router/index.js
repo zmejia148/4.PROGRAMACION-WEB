@@ -5,31 +5,37 @@ import HomeView from '../views/HomeView.vue'
 import ProductsView from '../views/ProductsView.vue'
 import ProductCreateView from '../views/ProductCreateView.vue'
 import ProductEditView from '../views/ProductEditView.vue'
+import ChatView from '../views/ChatView.vue'
 
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: LoginView, meta: { requiresGuest: true } },
   { path: '/register', component: RegisterView, meta: { requiresGuest: true } },
-  { 
-    path: '/home', 
-    component: HomeView, 
-    meta: { requiresAuth: true } 
+  {
+    path: '/home',
+    component: HomeView,
+    meta: { requiresAuth: true }
   },
-  { 
-    path: '/products', 
-    component: ProductsView, 
-    meta: { requiresAuth: true } 
+  {
+    path: '/products',
+    component: ProductsView,
+    meta: { requiresAuth: true }
   },
-  { 
-    path: '/products/create', 
-    component: ProductCreateView, 
-    meta: { requiresAuth: true } 
+  {
+    path: '/products/create',
+    component: ProductCreateView,
+    meta: { requiresAuth: true }
   },
-  { 
-    path: '/products/edit/:id', 
-    component: ProductEditView, 
+  {
+    path: '/products/edit/:id',
+    component: ProductEditView,
     props: true,
-    meta: { requiresAuth: true } 
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/chat',
+    component: ChatView,
+    meta: { requiresAuth: true }
   }
 ]
 

@@ -5,7 +5,9 @@
       <div class="header-content">
         <h1><b>Bienvenido a MARCAPP</b></h1>
         <div class="user-info">
-          <span><b>Hola, {{ user?.username || 'Usuario' }}</b></span>
+          <span
+            ><b>Hola, {{ user?.username || 'Usuario' }}</b></span
+          >
           <button @click="logout" class="logout-btn">Cerrar Sesión</button>
         </div>
       </div>
@@ -34,11 +36,11 @@
           <button class="card-btn">Crear</button>
         </div>
 
-        <div class="action-card" @click="goToEditProducts">
-          <div class="card-icon">✏️</div>
-          <h3>Editar Productos</h3>
-          <p>Modifica productos existentes</p>
-          <button class="card-btn">Editar</button>
+        <div class="action-card" @click="goToChat">
+          <div class="card-icon">💬</div>
+          <h3>Chat</h3>
+          <p>Comunícate o consulta dudas dentro del sistema</p>
+          <button class="card-btn">Abrir Chat</button>
         </div>
       </div>
     </main>
@@ -50,60 +52,60 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      user: null
-    };
+      user: null,
+    }
   },
 
   mounted() {
-    this.checkAuthentication();
+    this.checkAuthentication()
   },
 
   methods: {
     checkAuthentication() {
-      const storedUser = localStorage.getItem("user");
-      const token = localStorage.getItem("token");
+      const storedUser = localStorage.getItem('user')
+      const token = localStorage.getItem('token')
 
       if (!token) {
-        this.$router.push("/login");
-        return;
+        this.$router.push('/login')
+        return
       }
 
-      if (!storedUser || storedUser === "undefined" || storedUser === "null") {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        this.$router.push("/login");
-        return;
+      if (!storedUser || storedUser === 'undefined' || storedUser === 'null') {
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        this.$router.push('/login')
+        return
       }
 
       try {
-        this.user = JSON.parse(storedUser);
+        this.user = JSON.parse(storedUser)
       } catch (error) {
-        console.error('Error parseando usuario:', error);
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        this.$router.push("/login");
+        console.error('Error parseando usuario:', error)
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        this.$router.push('/login')
       }
     },
 
     logout() {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      this.$router.push("/login");
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      this.$router.push('/login')
     },
 
     goToProducts() {
-      this.$router.push("/products");
+      this.$router.push('/products')
     },
 
     goToCreateProduct() {
-      this.$router.push("/products/create");
+      this.$router.push('/products/create')
     },
 
-    goToEditProducts() {
-      this.$router.push("/products");
-    }
-  }
-};
+    goToChat() {
+      this.$router.push('/chat')
+    },
+  },
+}
 </script>
 
 <style src="../assets/css/home.css"></style>
