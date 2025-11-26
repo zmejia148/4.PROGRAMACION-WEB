@@ -17,11 +17,15 @@
     <main class="home-main">
       <div class="welcome-section">
         <h2><b>Panel de Control</b></h2>
-        <p>Gestiona tus productos desde aquí</p>
+
+        <!-- TEXTO DIFERENTE POR ROL -->
+        <p v-if="role === 'admin'">Administración del sistema – gestiona productos y usuarios.</p>
+        <p v-else>Bienvenido al sistema, consulta información y productos.</p>
       </div>
 
       <!-- Action Cards -->
       <div class="actions-grid">
+        <!-- Ver productos (todos pueden verlo) -->
         <div class="action-card" @click="goToProducts">
           <div class="card-icon">📦</div>
           <h3>Ver Productos</h3>
@@ -29,13 +33,23 @@
           <button class="card-btn">Acceder</button>
         </div>
 
-        <div class="action-card" @click="goToCreateProduct">
+        <!-- Crear productos → SOLO ADMIN -->
+        <div class="action-card" v-if="role === 'admin'" @click="goToCreateProduct">
           <div class="card-icon">➕</div>
           <h3>Crear Producto</h3>
           <p>Agrega un nuevo producto al sistema</p>
           <button class="card-btn">Crear</button>
         </div>
 
+        <!-- Administrar usuario → SOLO ADMIN -->
+        <div class="action-card" v-if="role === 'admin'" @click="goToUserAdmin">
+          <div class="card-icon">🧑‍💼</div>
+          <h3>Administrar Usuarios</h3>
+          <p>Gestiona Rol de los usuarios</p>
+          <button class="card-btn">Usuarios</button>
+        </div>
+
+        <!-- Chat (todos lo pueden usar) -->
         <div class="action-card" @click="goToChat">
           <div class="card-icon">💬</div>
           <h3>Chat</h3>
@@ -50,9 +64,11 @@
 <script>
 export default {
   name: 'HomeView',
+
   data() {
     return {
       user: null,
+      role: null,
     }
   },
 
@@ -79,6 +95,7 @@ export default {
 
       try {
         this.user = JSON.parse(storedUser)
+        this.role = this.user.role // ← AÑADIDO
       } catch (error) {
         console.error('Error parseando usuario:', error)
         localStorage.removeItem('user')
@@ -103,6 +120,9 @@ export default {
 
     goToChat() {
       this.$router.push('/chat')
+    },
+    goToUserAdmin() {
+      this.$router.push('/admin/users')
     },
   },
 }

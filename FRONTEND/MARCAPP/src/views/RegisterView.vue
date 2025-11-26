@@ -1,13 +1,11 @@
 <template>
   <div class="auth-container">
-    <!-- Navbar estilo zatda -->
     <nav class="auth-navbar">
       <div class="navbar-brand">
-        <div class="brand-logo">Z</div>
-        <span class="brand-name">atda</span>
+        <div class="brand-logo"><h2>M</h2></div>
+        <span class="brand-name">ARCAPP</span>
       </div>
     </nav>
-
     <div class="auth-box">
       <!-- Encabezado con icono -->
       <div class="auth-header">
@@ -55,7 +53,7 @@
           <div v-if="confirmPasswordError" class="error-message">{{ confirmPasswordError }}</div>
         </div>
 
-        <!-- Indicador de fortaleza de contraseña -->
+        <!-- Indicador de fortaleza -->
         <div v-if="password" class="password-strength">
           <div class="strength-bar">
             <div 
@@ -63,20 +61,13 @@
               :class="passwordStrength"
             ></div>
           </div>
-          <div class="strength-text">
-            Fortaleza: {{ strengthText }}
-          </div>
+          <div class="strength-text">Fortaleza: {{ strengthText }}</div>
         </div>
 
-        <!-- Términos y condiciones -->
+        <!-- Términos -->
         <div class="terms-group">
           <label class="checkbox-label">
-            <input 
-              type="checkbox" 
-              v-model="acceptTerms" 
-              required 
-              class="checkbox-input"
-            />
+            <input type="checkbox" v-model="acceptTerms" required class="checkbox-input" />
             <span class="checkbox-mark"></span>
             Acepto los <a href="#" class="terms-link">términos y condiciones</a>
           </label>
@@ -99,12 +90,11 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="auth-page-footer">
       <p>&copy; 2024 zatda. Todos los derechos reservados.</p>
     </div>
 
-    <!-- Modal de éxito flotante -->
+    <!-- Modal éxito -->
     <div v-if="showSuccess" class="success-modal-overlay">
       <div class="success-modal">
         <div class="modal-header">
@@ -155,7 +145,6 @@ export default {
   computed: {
     passwordStrength() {
       if (!this.password) return 'weak';
-      
       const strength = this.calculatePasswordStrength(this.password);
       if (strength < 3) return 'weak';
       if (strength < 5) return 'medium';
@@ -163,22 +152,20 @@ export default {
     },
 
     strengthText() {
-      const strengths = {
-        weak: 'Débil',
-        medium: 'Media',
-        strong: 'Fuerte'
-      };
-      return strengths[this.passwordStrength];
+      const map = { weak: 'Débil', medium: 'Media', strong: 'Fuerte' };
+      return map[this.passwordStrength];
     },
 
     isFormValid() {
-      return this.username && 
-             this.password && 
-             this.confirmPassword && 
-             this.acceptTerms &&
-             !this.usernameError &&
-             !this.passwordError &&
-             !this.confirmPasswordError;
+      return (
+        this.username &&
+        this.password &&
+        this.confirmPassword &&
+        this.acceptTerms &&
+        !this.usernameError &&
+        !this.passwordError &&
+        !this.confirmPasswordError
+      );
     }
   },
 
@@ -194,20 +181,15 @@ export default {
     },
 
     validatePassword() {
-      if (this.password.length < 6) {
-        this.passwordError = "La contraseña debe tener al menos 6 caracteres";
-      } else {
-        this.passwordError = "";
-      }
+      this.passwordError = this.password.length < 6 ? "La contraseña debe tener al menos 6 caracteres" : "";
       this.validatePasswordMatch();
     },
 
     validatePasswordMatch() {
-      if (this.confirmPassword && this.password !== this.confirmPassword) {
-        this.confirmPasswordError = "Las contraseñas no coinciden";
-      } else {
-        this.confirmPasswordError = "";
-      }
+      this.confirmPasswordError = 
+        this.confirmPassword && this.password !== this.confirmPassword
+          ? "Las contraseñas no coinciden"
+          : "";
     },
 
     calculatePasswordStrength(password) {
@@ -222,20 +204,19 @@ export default {
 
     async register() {
       this.loading = true;
-      
+
       try {
-        console.log("📝 Intentando registro con:", this.username);
-        
+        console.log("📝 Registrando:", this.username);
+
+        // 🔥 AQUI ENVIAMOS EL ROL
         await registerUser({
           username: this.username,
           password: this.password,
+          role: "user"   // 👈 OBLIGATORIO PARA EL BACKEND
         });
 
-        console.log("✅ Registro exitoso");
-        
-        // Mostrar modal de éxito flotante
         this.showSuccess = true;
-        
+
       } catch (err) {
         console.error("❌ Error en registro:", err);
         alert("Error al registrar: " + (err.response?.data?.message || err.message));
@@ -251,6 +232,8 @@ export default {
     closeModal() {
       this.showSuccess = false;
     }
-  },
+  }
 };
 </script>
+
+<style src="../assets/css/auth.css"></style>

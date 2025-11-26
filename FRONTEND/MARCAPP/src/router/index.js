@@ -6,6 +6,7 @@ import ProductsView from '../views/ProductsView.vue'
 import ProductCreateView from '../views/ProductCreateView.vue'
 import ProductEditView from '../views/ProductEditView.vue'
 import ChatView from '../views/ChatView.vue'
+import AdminUser from "../views/AdminUsersView.vue"
 
 const routes = [
   { path: '/', redirect: '/login' },
@@ -36,6 +37,11 @@ const routes = [
     path: '/chat',
     component: ChatView,
     meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/users",
+    component: AdminUser,
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -44,32 +50,37 @@ const router = createRouter({
   routes
 })
 
-// Navigation Guard - VERIFICAR SI ESTÁ AUTENTICADO
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token')
-  const user = localStorage.getItem('user')
+  const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
 
-  console.log('Navigation Guard:')
-  console.log('Ruta destino:', to.path)
-  console.log('Token existe:', !!token)
-  console.log('User existe:', !!user)
+  console.log("Navigation Guard:");
+  console.log("Ruta destino:", to.path);
+  console.log("Token existe:", !!token);
+  console.log("User existe:", !!user);
 
-  // Si la ruta requiere autenticación y no hay token
+  // Si requiere autenticación
   if (to.meta.requiresAuth && !token) {
-    console.log('Acceso denegado: requiere autenticación')
-    next('/login')
-    return
+    return next("/login");
   }
 
-  // Si la ruta es para invitados (login/register) y ya está autenticado
+  // Si es ruta de invitados (login/register) y ya está logueado
   if (to.meta.requiresGuest && token) {
-    console.log('Ya está autenticado, redirigiendo a home')
-    next('/home')
-    return
+    return next("/home");
   }
 
-  console.log('Acceso permitido')
-  next()
-})
+  // 🔥 Validación especial para rutas solo ADMIN
+  if (to.meta.requiresAdmin) {
+    const parsedUser = JSON.parse(user || "{}");
+
+    if (parsedUser.role !== "admin") {
+      console.warn("❌ Acceso denegado: usuario no es admin");
+      return next("/home"); // redirigimos a Home si no es admin
+    }
+  }
+
+  next();
+});
+
 
 export default router

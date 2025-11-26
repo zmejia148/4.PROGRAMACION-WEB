@@ -1,43 +1,73 @@
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// =========================
+//  REGISTRO
+// =========================
 exports.register = async (req, res) => {
     try {
-        const user = await User.create(req.body);
-        res.json({ message: "Usuario registrado" });
+        console.log("📩 BODY RECIBIDO:", req.body);
+
+        const { username, password, role } = req.body;
+
+        const assignedRole = ["admin", "user"].includes(role) ? role : "user";
+
+        const user = await User.create({
+            username,
+            password,
+            role: assignedRole
+        });
+
+        res.json({ message: "Usuario registrado correctamente" });
+
     } catch (error) {
-        res.status(500).json({ error: "Error al registrar" });
+        console.error("❌ ERROR EN REGISTER:", error);
+        res.status(500).json({ error: "Error al registrar", details: error.message });
     }
 };
 
+// =========================
+// LOGIN
+// =========================
 exports.login = async (req, res) => {
     try {
         const { username, password } = req.body;
+
+        // Buscar usuario
         const user = await User.findOne({ username });
 
-        if (!user) return res.status(404).json({ error: "Usuario no encontrado" });
+        if (!user)
+            return res.status(404).json({ error: "Usuario no encontrado" });
 
-        const match = await bcrypt.compare(password, user.password);
-        if (!match) return res.status(400).json({ error: "Contraseña incorrecta" });
+        // Comparar contraseña usando el método del modelo
+        const isMatch = await user.comparePassword(password);
 
-        // Crear token
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-            expiresIn: "1d"
-        });
+        if (!isMatch)
+            return res.status(400).json({ error: "Contraseña incorrecta" });
+
+        // Crear token con datos del usuario
+        const token = jwt.sign(
+            {
+                id: user._id,
+                username: user.username,
+                role: user.role
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        );
 
         res.json({
-            message: 'Login exitoso',
+            message: "Login exitoso",
             token,
             user: {
                 id: user._id,
-                username: user.username   // ✅ AHORA SÍ
+                username: user.username,
+                role: user.role
             }
         });
 
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Error en el servidor' });
+        console.error("❌ ERROR EN LOGIN:", error);
+        res.status(500).json({ error: "Error en el servidor", details: error.message });
     }
 };
-

@@ -10,39 +10,40 @@
       </router-link>
 
       <!-- Mobile Toggle -->
-      <button 
-        class="nav-toggle" 
-        @click="toggleMobileMenu"
-        :class="{ 'active': isMobileMenuOpen }"
-      >
+      <button class="nav-toggle" @click="toggleMobileMenu" :class="{ active: isMobileMenuOpen }">
         <span></span>
         <span></span>
         <span></span>
       </button>
 
       <!-- Navigation Links -->
-      <div class="nav-menu" :class="{ 'active': isMobileMenuOpen }">
+      <div class="nav-menu" :class="{ active: isMobileMenuOpen }">
         <div class="nav-links">
-          <router-link 
-            to="/home" 
-            class="nav-link"
-            @click="closeMobileMenu"
-          >
+          <router-link to="/home" class="nav-link" @click="closeMobileMenu">
             <span class="link-icon">🏠</span>
             Inicio
           </router-link>
 
-          <router-link 
-            to="/products" 
-            class="nav-link"
-            @click="closeMobileMenu"
-          >
+          <router-link to="/products" class="nav-link" @click="closeMobileMenu">
             <span class="link-icon">📦</span>
             Productos
           </router-link>
 
-          <router-link 
-            to="/products/create" 
+          <!-- 🔵 SOLO ADMIN: Ver usuarios -->
+          <router-link
+            v-if="role === 'admin'"
+            to="/admin/users"
+            class="nav-link"
+            @click="closeMobileMenu"
+          >
+            <span class="link-icon">🧑‍💼</span>
+            Admin Usuarios
+          </router-link>
+
+          <!-- 🔵 SOLO ADMIN: Crear producto -->
+          <router-link
+            v-if="role === 'admin'"
+            to="/products/create"
             class="nav-link highlight"
             @click="closeMobileMenu"
           >
@@ -50,29 +51,25 @@
             Nuevo Producto
           </router-link>
 
-          <router-link 
-            to="/chat" 
-            class="nav-link"
-            @click="closeMobileMenu"
-          >
+          <router-link to="/chat" class="nav-link" @click="closeMobileMenu">
             <span class="link-icon">💬</span>
             Chat
           </router-link>
 
-          <button 
-            @click="logout" 
-            class="nav-link logout-btn"
-          >
+          <router-link v-if="role === 'user'" to="/cart" class="nav-link" @click="closeMobileMenu">
+            <span class="link-icon">🛒</span>
+            Mi Carrito
+          </router-link>
+
+          <button @click="logout" class="nav-link logout-btn">
             <span class="link-icon">🚪</span>
             Salir
           </button>
         </div>
 
-        <!-- User Info (Optional) -->
+        <!-- User Info -->
         <div class="user-section" v-if="user">
-          <div class="user-avatar">
-            {{ getUserInitials }}
-          </div>
+          <div class="user-avatar">{{ getUserInitials }}</div>
           <div class="user-info">
             <h2 class="user-name">{{ user.username }}</h2>
           </div>
@@ -88,62 +85,61 @@ export default {
   data() {
     return {
       isMobileMenuOpen: false,
-      user: null
-    };
+      user: null,
+      role: null,
+    }
   },
 
   mounted() {
-    this.loadUser();
-    // Cerrar menú móvil al hacer clic fuera
-    document.addEventListener('click', this.handleClickOutside);
+    this.loadUser()
+    document.addEventListener('click', this.handleClickOutside)
   },
 
   beforeUnmount() {
-    document.removeEventListener('click', this.handleClickOutside);
+    document.removeEventListener('click', this.handleClickOutside)
   },
 
   computed: {
     getUserInitials() {
-      if (!this.user || !this.user.username) return 'U';
-      return this.user.username.charAt(0).toUpperCase();
-    }
+      if (!this.user || !this.user.username) return 'U'
+      return this.user.username.charAt(0).toUpperCase()
+    },
   },
 
   methods: {
     loadUser() {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser && storedUser !== "undefined") {
-        try {
-          this.user = JSON.parse(storedUser);
-        } catch (error) {
-          console.error('Error loading user:', error);
-        }
+      const storedUser = localStorage.getItem('user')
+      const storedRole = localStorage.getItem('role')
+
+      if (storedUser) {
+        this.user = JSON.parse(storedUser)
+      }
+
+      if (storedRole) {
+        this.role = storedRole
       }
     },
 
     toggleMobileMenu() {
-      this.isMobileMenuOpen = !this.isMobileMenuOpen;
+      this.isMobileMenuOpen = !this.isMobileMenuOpen
     },
 
     closeMobileMenu() {
-      this.isMobileMenuOpen = false;
+      this.isMobileMenuOpen = false
     },
 
     handleClickOutside(event) {
-      const navbar = this.$el;
-      const toggleButton = navbar.querySelector('.nav-toggle');
-      
+      const navbar = this.$el
       if (!navbar.contains(event.target) && this.isMobileMenuOpen) {
-        this.closeMobileMenu();
+        this.closeMobileMenu()
       }
     },
 
     logout() {
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
-      this.$router.push("/login");
-      this.closeMobileMenu();
-    }
-  }
-};
+      localStorage.clear()
+      this.$router.push('/login')
+      this.closeMobileMenu()
+    },
+  },
+}
 </script>
