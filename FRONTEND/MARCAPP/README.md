@@ -1,38 +1,97 @@
 # MARCAPP
+MERCAPP es una aplicación web desarrollada con Vue.js, Node.js, Express y MongoDB, diseñada para gestionar productos, usuarios con roles, categorías, chat en tiempo real y un carrito de compras dinámico. Es un sistema modular, escalable y construido siguiendo el patrón MVC.
 
-This template should help get you started developing with Vue 3 in Vite.
+# Características Principales
+🔐 Gestión de Usuarios y Roles
+Registro e inicio de sesión.
+Autenticación con JWT.
+Roles: Admin y Usuario.
+Control de acceso basado en permisos.
+Vistas dinámicas según el rol.
+📦 Catálogo de Productos
+Visualización de productos con imagen, precio, descripción.
+Vista de catálogo accesible para todos los roles.
+Vista administrativa para CRUD.
+🛒 Carrito de Compras
+Agregar productos al carrito.
+Ver carrito completo.
+Persistencia usando localStorage.
+🗃 CRUD Completo de Productos
+Crear productos (admin).
+Editar productos (admin).
+Eliminar productos (admin).
+Listar productos (todos los usuarios).
+💬 Chat en Tiempo Real
+Implementado con Socket.io.
+Disponible para cualquier usuario logeado.
 
-## Recommended IDE Setup
+# Tecnologías Utilizadas
+Frontend
+Vue.js 3
+Vue Router
+Axios
+CSS personalizado
+Backend
+Node.js
+Express.js
+Mongoose (MongoDB)
+JWT (Json Web Token)
+Bcrypt
+Socket.io
+Base de datos
+MongoDB Atlas o local
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+# Estructura del Proyecto
+BACKEND/
+│── controllers/
+│── models/
+│── routes/
+│── config/
+│── server.js
+│── .env
 
-## Recommended Browser Setup
+FRONTEND/
+│── views/
+│── components/
+│── services/
+│── assets/
+│── router/
+│── App.vue
+│── main.js
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+# USUARIO ADMIN CREAR PARA TENER USUARIO ADMINISTRADOR
+1️.  Abrir Postman
+2️. Crear una petición POST
+POST http://localhost:3000/api/auth/register
+3️. Enviar el siguiente JSON en el Body → raw → JSON
+{
+  "username": "admin",
+  "password": "1234", (ESTA CONTRASEÑAS LA PUEDES PERSONALIZAR)
+  "role": "admin"
+}
+4️. Respuesta esperada
+{
+  "message": "Usuario registrado correctamente"
+}
 
-## Customize configuration
+Ahora podrás iniciar sesión con:
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Usuario: admin
+Contraseña: 1234
 
-## Project Setup
-
-```sh
+# Ejecución del Proyecto
+* Backend
+cd BACKEND
 npm install
-```
+node server.js
 
-### Compile and Hot-Reload for Development
+* Frontend
+cd FRONTEND
+npm install
+npm run serve
 
-```sh
-npm run dev
-```
+# Acceso y Roles
+Rol	Permisos
+Admin	-> Crear/editar/eliminar productos, gestionar categorías, gestionar usuarios.
+Usuario ->	Ver productos, agregar al carrito, usar chat.
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
