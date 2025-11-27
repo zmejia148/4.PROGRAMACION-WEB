@@ -59,6 +59,10 @@ FRONTEND/
 │── App.vue
 │── main.js
 
+# Clonar el repositorio
+git clone https://github.com/zmejia148/4.PROGRAMACION-WEB/tree/MERCAPP
+cd MERCAPP
+
 # USUARIO ADMIN CREAR PARA TENER USUARIO ADMINISTRADOR
 1️.  Abrir Postman
 2️. Crear una petición POST
